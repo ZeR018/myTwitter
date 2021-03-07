@@ -1,13 +1,10 @@
-import { Button, DialogContent, makeStyles, Typography } from '@material-ui/core';
+import {Button, makeStyles, TextField, Typography} from '@material-ui/core';
 import React from 'react'
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
 import PeopleIcon from '@material-ui/icons/PeopleOutline';
 import ChatIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
+import ModalBlock from "../Components/ModalBlock";
 
 // Material ui and other styles
 const useStyles = makeStyles((theme) => ({
@@ -93,6 +90,7 @@ function SignIn() {
 	//styles hook
 	const classes = useStyles();
 
+	// SignIn modal logic
 	const [openSignIn, setOpenSignIn] = React.useState(false);
 	const handleOpenSignIn = () => {
 		setOpenSignIn(true);
@@ -100,8 +98,6 @@ function SignIn() {
 	const handleCloseSignIn = () => {
 		setOpenSignIn(false);
 	};
-
-
 
 
 	return (
@@ -124,42 +120,28 @@ function SignIn() {
 					<Button onClick={handleOpenSignIn} variant='outlined' color='primary' fullWidth>Войти</Button>
 				</div> 
 			</section>
-
-			<Dialog
-				open={openSignIn}
-				onClose={handleCloseSignIn}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-				fullWidth
-			>
-				<DialogTitle id="alert-dialog-title">{"Войти в Твиттер"}</DialogTitle>
-				<DialogContent>
-					<TextField 
-						margin='normal' 
-						variant='filled' 
-						id="standard-basic" 
-						label="E-Mail" 
-						type='email' 
-						fullWidth 
-						autoFocus
-					/>
-				</DialogContent>
-				<DialogContent>
-					<TextField 
-						margin='normal' 
-						variant='filled' 
-						id="standard-basic" 
-						label="Password" 
-						type='password' 
-						fullWidth 
-					/>
-				</DialogContent>
-        <DialogContent>
-          <Button style={{marginBottom: 15}} onClick={handleCloseSignIn} variant='contained' color="primary" fullWidth>
-            Войти
-          </Button>
-        </DialogContent>
-      </Dialog>
+			<ModalBlock title={'Войти в Твиттер'} open={openSignIn} onClose={handleCloseSignIn}>
+				<TextField
+                        margin='normal'
+                        variant='filled'
+                        id="standard-basic"
+                        label="E-Mail"
+                        type='email'
+                        fullWidth
+                        autoFocus
+                    />
+                    <TextField
+                        margin='normal'
+                        variant='filled'
+                        id="standard-basic"
+                        label="Password"
+                        type='password'
+                        fullWidth
+                    />
+                    <Button style={{marginBottom: 15, marginTop: 10}} variant='contained' color="primary" fullWidth>
+                        Войти
+                    </Button>
+			</ModalBlock>
 		</div>
 	)
 }
